@@ -12,47 +12,20 @@ export interface Pokemon{
   url: string;
 }
 
-export interface PokemonCliked{
-  height: number;
-  image: string;
-}
-
 const Content: React.FC<PokeProps>=({pokeList})=>{
-
-  // i tutaj trzeba było dać pusty obiekt w useState no i oczywiście otypować to interfejsem
-  const [elementData, setElementData] = useState<PokemonCliked>({height: 0, image:''});
-  const [clicked, setClicked] = useState(false);
-  const [elementClicked, setElementClicked] = useState('');
-  const [isFetching, setIsFetching] = useState(true);
-  const [image, setImage] = useState('');
-
-  const clickHandler = (e: any)=>{
-    console.log(e.target.textContent);
-    setElementClicked(e.target.textContent)
-    setIsFetching(false);
-  }
-
-  useEffect(()=>{
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${elementClicked}`)
-      .then((response)=>{
-        setElementData(response.data);
-        setImage(response.data.sprites.other.dream_world.front_default);
-      });
-  },[elementClicked]);
-  console.log(elementData);
-
+  
+    const pokemonList:string[] = pokeList.map((el)=>el.name);
+   
     return (
       <div >
-       <ul onClick={clickHandler}>{pokeList.map((el: Pokemon)=>{
+       <ul>{pokeList.map((el: Pokemon)=>{
            return(
              <li key={el.name}>
-               {el.name}
-               {/* <PokeCard
+               <PokeCard
                   pokeName={el.name}
-                  pokeHeight={elementData.height}
-                  pokeImage={image}
-                /> */}
+                  pokemonList={pokemonList}
+                />
+
                {/* {!isFetching && elementData.height}  */}
                {/* tutaj trzeba było dać renderowanie warunkowe, żeby uniknąć sytuacji że dane się nie pobrały a ja chcę z nich cos wyciągnąć */}
              </li>
