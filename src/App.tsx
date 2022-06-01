@@ -8,7 +8,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Navigation from './components/Navigation/Navigations';
 import AboutPoke from './components/AboutPoke/AboutPoke';
 import Footer from './components/Footer/Footer';
-
+import { Grid } from '@mui/material';
 
 const App: React.FC=()=>{
 
@@ -27,34 +27,43 @@ const App: React.FC=()=>{
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <div>
-              <Navigation/>
-              <Header text={"Choose your pokemon!"}/>
-              <Form/>
-              <Footer/>
-            </div>
-          }
-          />
+        <Grid container spacing={10}>
+          <Grid item xs={12}>
+            <Navigation/>
+          </Grid>
+          <Routes>
+            <Route path="/" element={
+              <Grid item xs={12}>
+                <Grid container xs={12}>
+                  <Grid item xs={12}>
+                    <Header text={"Choose your pokemon!"}/>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Form/>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Footer/>
+                  </Grid>
+                </Grid>
+              </Grid>
+            }
+            />
 
-          <Route path="/pokes" element={
-            <div>
-              <Navigation/>
-              <Content pokeList={pokeList}/> 
-            </div>
-          }
-          />
+            <Route path="/pokes" element={
+              <Grid item xs={12}>
+                <Content pokeList={pokeList}/> 
+              </Grid>
+            }
+            />
 
-          <Route path="/about" element={
-            <div>
-              <Navigation/>
-              <AboutPoke/>
-
-            </div>
-          }
-          />
-        </Routes>
+            <Route path="/about" element={
+              <Grid item xs={12}>
+                <AboutPoke/>
+              </Grid>
+            }
+            />
+          </Routes>
+        </Grid>
       </BrowserRouter>
     </div>
   );

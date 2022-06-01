@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PokeCard from "../PokeCard/PokeCard";
-
+import { Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export interface PokeProps{
     pokeList: Array<Pokemon>;
@@ -17,21 +18,24 @@ const Content: React.FC<PokeProps>=({pokeList})=>{
     const pokemonList:string[] = pokeList.map((el)=>el.name);
    
     return (
-      <div >
-       <ul>{pokeList.map((el: Pokemon)=>{
-           return(
-             <li key={el.name}>
-               <PokeCard
-                  pokeName={el.name}
-                  pokemonList={pokemonList}
-                />
+      <Grid container xs={12}>
+        <Grid item xs={12}>
+          <Typography variant="h2" sx={{fontSize: 40}}>Click on name of the Pokemon to see details</Typography>
+        </Grid>
+        <Grid item xs={12}>
 
-               {/* {!isFetching && elementData.height}  */}
-               {/* tutaj trzeba było dać renderowanie warunkowe, żeby uniknąć sytuacji że dane się nie pobrały a ja chcę z nich cos wyciągnąć */}
-             </li>
-           ) 
-       })}</ul>
-      </div>
+          {pokeList.map((el: Pokemon)=>{
+              return(
+                  <PokeCard
+                      key={el.name}
+                      pokeName={el.name}
+                      pokemonList={pokemonList}
+                    />
+              )})}
+          
+        </Grid>
+
+      </Grid>
     );
   }
   
