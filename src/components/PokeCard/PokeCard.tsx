@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import { Card, CardHeader, CardContent, CardMedia } from "@mui/material";
+import { Fade } from "@mui/material";
 
 export interface CardProps{
     pokemonList: string[];
@@ -17,29 +18,13 @@ export interface PokemonCliked{
   height: number;
   image: string;
   abilities: string[];
-  // ability: Ability;
-  // clickAbilityNum: AbilityNumber;
-  // clickAbility: Abilities;
+  base_experience: number;
 }
-
-// export interface Ability{
-//   name: string;
-//   url: string;
-// }
-
-// export interface AbilityNumber{
-//   abilityNum: Ability;
-// }
-
-// export interface Abilities{
-//   abilities: Array<AbilityNumber>
-// }
-
 
 const PokeCard: React.FC<CardProps>=({pokemonList})=>{
 
   // i tutaj trzeba było dać pusty obiekt w useState no i oczywiście otypować to interfejsem
-  const [elementData, setElementData] = useState<PokemonCliked>({weight: 0,height: 0, image:'',abilities:[], name:''});
+  const [elementData, setElementData] = useState<PokemonCliked>({weight: 0,height: 0, image:'',abilities:[], name:'', base_experience:0});
   const [clicked, setClicked] = useState(false);
   const [elementClicked, setElementClicked] = useState('');
   const [isFetching, setIsFetching] = useState(true);
@@ -64,6 +49,15 @@ const PokeCard: React.FC<CardProps>=({pokemonList})=>{
           setAbilities(response.data.abilities[0].ability.name)
         });
     }
+    else{
+      axios
+        .get(`https://pokeapi.co/api/v2/pokemon/bulbasaur`)
+        .then((response)=>{
+          setElementData(response.data);
+          setImage(response.data.sprites.other.dream_world.front_default);
+          setAbilities(response.data.abilities[0].ability.name)
+        });
+    }
   },[elementClicked]);
 
   console.log(elementData);
@@ -71,6 +65,7 @@ const PokeCard: React.FC<CardProps>=({pokemonList})=>{
   
     return (
       <div onClick={clickHandler}>
+        <Fade in={true} timeout={2000}>
         <Grid container spacing={2} xs={12}>
           <Grid item xs={2}>
             <Grid container spacing={1}>
@@ -83,29 +78,31 @@ const PokeCard: React.FC<CardProps>=({pokemonList})=>{
               })}
             </Grid>
           </Grid>
-          {elementData && clicked &&(
-           <Grid item xs={10}>
-              <Grid container xs={12} justifyContent="center">
-              <Card sx={{padding:"20px", minWidth: 200}}>
-                <CardHeader
-                  title={(elementData.name).toUpperCase()}
-                />
-                <CardContent>
-                  <Typography variant="caption" fontSize={18} display="block">Heigth: {elementData.height}</Typography>
-                  <Typography variant="caption" fontSize={18} display="block">Weigth: {elementData.weight}</Typography>
-                  <Typography variant="caption" fontSize={18} display="block">Ability: {abilities}</Typography>
-                </CardContent>
-                <CardMedia
-                  component="img"
-                  image={image}
-                  alt="Pokemon image"
-                  height="350"
-                />
-              </Card>
-              </Grid>
-           </Grid>
+          {elementData &&(
+            <Grid item xs={10} >
+                <Grid container xs={12} justifyContent="center">
+                <Card sx={{padding:"20px", minWidth: 200}}>
+                  <CardHeader
+                    title={(elementData.name).toUpperCase()}
+                  />
+                  <CardContent>
+                    <Typography variant="caption" fontSize={18} display="block">Heigth: {elementData.height}</Typography>
+                    <Typography variant="caption" fontSize={18} display="block">Weigth: {elementData.weight}</Typography>
+                    <Typography variant="caption" fontSize={18} display="block">Base experience: {elementData.base_experience}</Typography>
+                    <Typography variant="caption" fontSize={18} display="block">Ability: {abilities}</Typography>
+                  </CardContent>
+                  <CardMedia
+                    component="img"
+                    image={image}
+                    alt="Pokemon image"
+                    height="350"
+                  />
+                </Card>
+                </Grid>
+            </Grid>
             )}
           </Grid>
+          </Fade>
 
       </div>
     );

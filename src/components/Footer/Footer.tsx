@@ -1,8 +1,12 @@
 import React from "react";
+import { Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const Footer: React.FC = () =>{
     return(
-        <p>Made by Karolina Woźniak</p>
+     <footer style={{position: "fixed", bottom:0, left:20}}>
+        <Typography variant="caption" align="center">Made by Karolina Woźniak</Typography>
+    </footer>
     )
 }
 

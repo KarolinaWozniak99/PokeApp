@@ -39,11 +39,9 @@ const App: React.FC=()=>{
                     <Header text={"Choose your pokemon!"}/>
                   </Grid>
                   <Grid item xs={12}>
-                    <Form/>
+                    <Form pokeList={pokeList}/>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Footer/>
-                  </Grid>
+                  
                 </Grid>
               </Grid>
             }
@@ -63,6 +61,9 @@ const App: React.FC=()=>{
             }
             />
           </Routes>
+          <Grid item xs={12}>
+            <Footer/>
+          </Grid>
         </Grid>
       </BrowserRouter>
     </div>
