@@ -4,12 +4,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography/Typography';
 import { Grid } from "@mui/material";
 import {AppBar, Toolbar} from '@mui/material';
+import { Stack } from "@mui/material";
 
 const Navigation: React.FC = () =>{
     return(
-
-        <AppBar>
-            <Grid container xs={12} justifyContent="center">
+        <Stack justifyContent="center" direction="row" spacing={4} sx={{borderBottom: "2px solid black", padding:"10px"}}>
                 <Link to="/">
                     <Button variant="contained" color="primary" size="medium">
                             Home
@@ -27,8 +26,7 @@ const Navigation: React.FC = () =>{
                             About pokemons
                     </Button>
                 </Link>
-            </Grid>
-        </AppBar>
+        </Stack>
     )
 }
 

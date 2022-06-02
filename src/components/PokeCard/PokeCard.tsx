@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Grid } from "@mui/material";
+import { Button } from "@mui/material";
+import { Card, CardHeader, CardContent, CardMedia } from "@mui/material";
 
 export interface CardProps{
-    pokeName: string;
     pokemonList: string[];
 }
 
 export interface PokemonCliked{
+  name: string;
   weight: number;
   height: number;
   image: string;
@@ -34,10 +36,10 @@ export interface PokemonCliked{
 // }
 
 
-const PokeCard: React.FC<CardProps>=({pokeName, pokemonList})=>{
+const PokeCard: React.FC<CardProps>=({pokemonList})=>{
 
   // i tutaj trzeba było dać pusty obiekt w useState no i oczywiście otypować to interfejsem
-  const [elementData, setElementData] = useState<PokemonCliked>({weight: 0,height: 0, image:'',abilities:[]});
+  const [elementData, setElementData] = useState<PokemonCliked>({weight: 0,height: 0, image:'',abilities:[], name:''});
   const [clicked, setClicked] = useState(false);
   const [elementClicked, setElementClicked] = useState('');
   const [isFetching, setIsFetching] = useState(true);
@@ -48,7 +50,7 @@ const PokeCard: React.FC<CardProps>=({pokeName, pokemonList})=>{
     if(pokemonList.indexOf(e.target.textContent)!==-1){
       setElementClicked(e.target.textContent)
       setIsFetching(false);
-      setClicked(!clicked);
+      setClicked(true);
     }
   }
 
@@ -64,36 +66,44 @@ const PokeCard: React.FC<CardProps>=({pokeName, pokemonList})=>{
     }
   },[elementClicked]);
 
-  console.log(abilities);
+  console.log(elementData);
 
   
     return (
       <div onClick={clickHandler}>
-        <Grid container xs={10}>
-          <Grid item xs={6}>
-            <h3>{pokeName}</h3>
+        <Grid container spacing={2} xs={12}>
+          <Grid item xs={2}>
+            <Grid container spacing={1}>
+              {pokemonList.map((el)=>{
+                return(
+                  <Grid item xs={12}>
+                    <Button variant="contained" fullWidth={true} color="secondary">{el}</Button>
+                  </Grid>
+                )
+              })}
+            </Grid>
           </Grid>
           {elementData && clicked &&(
-            <Grid item xs={4}>
-              <Stack direction="row" spacing={2}>
-                  <Grid item xs={6}>
-                    <Typography sx={{fontSize:20}}>{pokeName} </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <img src={image} width="80px"/>  
-                  </Grid>
-                  <Grid item xs={6}>
-                    Ability: {abilities}
-                  </Grid>
-                  <Grid item xs={6}>
-                    Wight: {elementData.weight}
-                  </Grid>
-                  <Grid item xs={6}>
-                    Height: {elementData.height}
-                  </Grid>     
-                
-              </Stack>
-            </Grid>
+           <Grid item xs={10}>
+              <Grid container xs={12} justifyContent="center">
+              <Card sx={{padding:"20px", minWidth: 200}}>
+                <CardHeader
+                  title={(elementData.name).toUpperCase()}
+                />
+                <CardContent>
+                  <Typography variant="caption" fontSize={18} display="block">Heigth: {elementData.height}</Typography>
+                  <Typography variant="caption" fontSize={18} display="block">Weigth: {elementData.weight}</Typography>
+                  <Typography variant="caption" fontSize={18} display="block">Ability: {abilities}</Typography>
+                </CardContent>
+                <CardMedia
+                  component="img"
+                  image={image}
+                  alt="Pokemon image"
+                  height="350"
+                />
+              </Card>
+              </Grid>
+           </Grid>
             )}
           </Grid>
 

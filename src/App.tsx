@@ -27,7 +27,7 @@ const App: React.FC=()=>{
   return (
     <div className="App">
       <BrowserRouter>
-        <Grid container spacing={10}>
+        <Grid container spacing={10} justifyContent="center">
           <Grid item xs={12}>
             <Navigation/>
           </Grid>
@@ -50,7 +50,7 @@ const App: React.FC=()=>{
             />
 
             <Route path="/pokes" element={
-              <Grid item xs={12}>
+              <Grid item xs={10} justifyContent="center">
                 <Content pokeList={pokeList}/> 
               </Grid>
             }

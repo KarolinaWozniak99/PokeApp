@@ -15,7 +15,7 @@ const Form: React.FC=()=>{
     return(
         <form>
             {/* <input type="text"/> */}
-            <Grid container xs={12}>
+            <Grid container spacing={4} xs={12}>
                 <Grid item xs={12}>
                     <Typography variant="h2" sx={{fontSize: 30}}>Click button to get random pokemon</Typography>
                 </Grid>
