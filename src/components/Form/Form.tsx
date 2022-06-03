@@ -47,8 +47,6 @@ const Form: React.FC<Props>=({pokeList})=>{
     })
 
     return(
-        <form>
-            {/* <input type="text"/> */}
             <Grid container spacing={4} xs={12}>
                 <Grid item xs={12}>
                     <Typography variant="h2" sx={{fontSize: 30}}>Click button to get random pokemon</Typography>
@@ -62,10 +60,7 @@ const Form: React.FC<Props>=({pokeList})=>{
                 <Grid item xs={12}>
                     <img src={image} width="150px"/>
                 </Grid>
-
-
             </Grid>
-        </form> 
     )
 }
 

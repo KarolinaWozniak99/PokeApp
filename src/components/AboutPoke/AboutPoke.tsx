@@ -1,8 +1,13 @@
 import React from "react";
+import { Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const AboutPoke: React.FC = () =>{
     return(
-        <p>To jest stronka o pokemonach a tutaj możesz poczytać sobie więcej na ten temat.</p>
+        <div>
+            <Typography variant="h2" sx={{fontSize: 40}}>More pokemons?</Typography>
+             <p>If you want read something about Pokemons, visit <a href="https://bulbapedia.bulbagarden.net/wiki/Event_Pok%C3%A9mon">Bulbapedia</a> </p>
+        </div>
     )
 }
 

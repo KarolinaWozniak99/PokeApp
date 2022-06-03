@@ -20,7 +20,7 @@ const Content: React.FC<PokeProps>=({pokeList})=>{
     return (
       <Grid container xs={12} spacing={10}>
         <Grid item xs={12}>
-          <Typography variant="h2" sx={{fontSize: 40}}>Click on name of the Pokemon to see details</Typography>
+          <Typography variant="h2" sx={{fontSize: 40}}>Click on the name of Pokemon to see details</Typography>
         </Grid>
         <Grid item xs={12}>
           <PokeCard pokemonList={pokemonList}/>

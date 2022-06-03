@@ -22,8 +22,6 @@ export interface PokemonCliked{
 }
 
 const PokeCard: React.FC<CardProps>=({pokemonList})=>{
-
-  // i tutaj trzeba było dać pusty obiekt w useState no i oczywiście otypować to interfejsem
   const [elementData, setElementData] = useState<PokemonCliked>({weight: 0,height: 0, image:'',abilities:[], name:'', base_experience:0});
   const [clicked, setClicked] = useState(false);
   const [elementClicked, setElementClicked] = useState('');
